@@ -1,0 +1,293 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+.hero .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: 1103.41px;
+    left: 171.59px;
+    top: 35.02px;
+    border: 1px solid #000000;
+}
+
+.hero .nav-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #000000;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.hero {
+    width: 100%;
+    min-height: 100vh; /* Takes full viewport height */
+    /* 1. Linear Gradient (The purple overlay) */
+    /* 2. The Image (The woman) */
+    background: 
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)),
+        url('./pros/hero.png'),
+        url('./image.png'),
+        url('./pros/Bitmap.png');
+        
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    
+    /* Layout fixes */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+     /* Push content down below nav */
+}
+
+#quote-section {
+    background-color: #C271FF;
+    height: 392px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#quote-section .quote-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    gap: 53px;
+}
+
+#quote-section .quote-part2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #FFFFFF;
+    width: 730px;
+    height: 158px;
+}
+
+#tutorial-section h1 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #071629;
+    margin-top: 80px;
+}
+
+#tutorial-section .tutorial-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+}
+
+
+#tutorial-section .tutorial {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 335px;
+    width: 255px;
+}
+
+#tutorial-section .tutorial .profile {
+    height: 154px;
+    width: 255px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#tutorial-section .tutorial .heading {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #071629;
+    text-align: start;
+    width: 255px;
+}
+
+#tutorial-section .tutorial .paragraph {
+    font-size: 14px;
+    color: #071629;
+    text-align: start;
+}
+
+#tutorial-section .tutorial .profile2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
+    width: 255px;
+    color: #C271FF;
+    font-weight: semi-bold;
+}
+
+#tutorial-section .tutorial .profile2 img {
+    height: 30px;
+    width: 30px;
+}
+
+#tutorial-section .tutorial .card-end {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    width: 255px;
+}
+
+#membership {
+    background-color: #071629;
+    height: 502px;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+#membership h1 {
+    color: #FFFFFF;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+#membership h1 span {
+    color: #C271FF;
+    font-weight: bold;
+}
+
+#membership .members {
+    display: flex;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+#membership .members div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 257px;
+    height: 153px;
+    text-align: center;
+}
+
+#membership .members div h2 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+#membership .members div p {
+    font-size: 14px;
+    color: #FFFFFF;
+    line-height: 20px;
+}
+
+#membership button {
+    margin-top: 40px;
+    width: 200px;
+    height: 50px;
+    background-color: #C271FF;
+    border: none;
+    border-radius: 25px;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#faq-section {
+    text-align: center;
+    height: 707px;
+    width: 920px;
+    margin: 80px auto;
+}
+
+#faq-section h1 {
+    font-size: 60px;
+    font-weight: 100;
+    color: #071629;
+    margin-bottom: 40px;
+}
+
+#faq-section .faq-container {
+    display: flex;
+}
+
+#faq-section .question-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding: 0 20px;
+}
+
+#faq-section .question-group div h2 {
+    font-size: 16px;
+    font-weight: bold;
+    color: #071629;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+#faq-section .question-group div p {
+    font-size: 14px;
+    color: #071629;
+    text-align: left;
+    line-height: 24px;
+}
+
+footer {
+    background-color: #071629;
+    height: 249px;
+    color: #FFFFFF;
+    font-size: 14px;
+}
+
+footer .footer-items {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 80px;
+}
+
+footer .footer-items div a {
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+footer .footer-items div {
+    height: 30px;
+    width: 160px;
+}
+
+footer .footer-items img {
+    height: 30px;
+    width: 169px;
+}
+
+footer .footer-items div a img {
+    height: 30px;
+    width: 30px;
+}
+
+footer .footer-content {
+    padding-top: 50px;
+}
+
+footer .footer-content p {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 12px;
+}
