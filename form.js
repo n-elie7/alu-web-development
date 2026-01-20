@@ -1,104 +1,117 @@
-const form = document.getElementById('contactForm');
-    const nameInput = document.getElementById('name');
-    const emailInput = document.getElementById('email');
-    const phoneInput = document.getElementById('phone');
-    const messageInput = document.getElementById('message');
-    const successMessage = document.getElementById('successMessage');
+let fileCounter = 1;
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const isNameValid = validateName();
-        const isEmailValid = validateEmail();
-        const isPhoneValid = validatePhone();
-        const isMessageValid = validateMessage();
+const regexPatterns = {
+  name: /^[a-zA-Z\s]{2,}$/,
+  email: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  phone: /^\d{10,15}$/,
+  password:
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/,
+  country: /^[a-zA-Z\s]{2,}$/,
+  city: /^[a-zA-Z\s]{2,}$/,
+  postalCode: /^[a-zA-Z0-9\s-]{3,10}$/,
+};
 
-        if (isNameValid && isEmailValid && isPhoneValid && isMessageValid) {
-            successMessage.classList.add('show');
-            form.reset();
-            
-            nameInput.classList.remove('success');
-            emailInput.classList.remove('success');
-            phoneInput.classList.remove('success');
-            messageInput.classList.remove('success');
-            
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
-        }
-    });
+const form = document.getElementById("registrationForm");
+const inputs = form.querySelectorAll("input");
 
-    nameInput.addEventListener('blur', validateName);
-    emailInput.addEventListener('blur', validateEmail);
-    phoneInput.addEventListener('blur', validatePhone);
-    messageInput.addEventListener('blur', validateMessage);
-
-    function validateName() {
-        const nameValue = nameInput.value.trim();
-        const nameError = document.getElementById('nameError');
-        
-        if (nameValue.length < 2) {
-            nameInput.classList.add('error');
-            nameInput.classList.remove('success');
-            nameError.classList.add('show');
-            return false;
-        } else {
-            nameInput.classList.remove('error');
-            nameInput.classList.add('success');
-            nameError.classList.remove('show');
-            return true;
-        }
+inputs.forEach((input) => {
+  input.addEventListener("blur", () => validateField(input));
+  input.addEventListener("input", () => {
+    if (input.classList.contains("error")) {
+      validateField(input);
     }
+  });
+});
 
-    function validateEmail() {
-        const emailValue = emailInput.value.trim();
-        const emailError = document.getElementById('emailError');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (!emailRegex.test(emailValue)) {
-            emailInput.classList.add('error');
-            emailInput.classList.remove('success');
-            emailError.classList.add('show');
-            return false;
-        } else {
-            emailInput.classList.remove('error');
-            emailInput.classList.add('success');
-            emailError.classList.remove('show');
-            return true;
-        }
-    }
+function validateField(input) {
+  const fieldName = input.name;
+  const value = input.value.trim();
+  const errorElement = document.getElementById(`${fieldName}Error`);
 
-    function validatePhone() {
-        const phoneValue = phoneInput.value.trim();
-        const phoneError = document.getElementById('phoneError');
-        const phoneRegex = /^\d{10}$/;
-        
-        if (!phoneRegex.test(phoneValue.replace(/[\s-]/g, ''))) {
-            phoneInput.classList.add('error');
-            phoneInput.classList.remove('success');
-            phoneError.classList.add('show');
-            return false;
-        } else {
-            phoneInput.classList.remove('error');
-            phoneInput.classList.add('success');
-            phoneError.classList.remove('show');
-            return true;
-        }
-    }
+  if (!value) {
+    input.classList.remove("valid");
+    input.classList.add("error");
+    errorElement.classList.add("show");
+    errorElement.textContent = "This field is required";
+    return false;
+  }
 
-    function validateMessage() {
-        const messageValue = messageInput.value.trim();
-        const messageError = document.getElementById('messageError');
-        
-        if (messageValue.length < 10) {
-            messageInput.classList.add('error');
-            messageInput.classList.remove('success');
-            messageError.classList.add('show');
-            return false;
-        } else {
-            messageInput.classList.remove('error');
-            messageInput.classList.add('success');
-            messageError.classList.remove('show');
-            return true;
-        }
+  const isValid = regexPatterns[fieldName].test(value);
+
+  if (isValid) {
+    input.classList.remove("error");
+    input.classList.add("valid");
+    errorElement.classList.remove("show");
+    return true;
+  } else {
+    input.classList.remove("valid");
+    input.classList.add("error");
+    errorElement.classList.add("show");
+    return false;
+  }
+}
+
+function validateForm() {
+  let isValid = true;
+  inputs.forEach((input) => {
+    if (!validateField(input)) {
+      isValid = false;
     }
+  });
+  return isValid;
+}
+
+function downloadJSON(data, filename) {
+  const jsonStr = JSON.stringify(data, null, 2);
+  const blob = new Blob([jsonStr], { type: "application/json" });
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = filename;
+
+  document.body.appendChild(link);
+  link.click();
+
+  document.body.removeChild(link);
+  URL.revokeObjectURL(url);
+}
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (!validateForm()) {
+    return;
+  }
+
+  const formData = {
+    name: document.getElementById("name").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    password: document.getElementById("password").value,
+    address: {
+      country: document.getElementById("country").value.trim(),
+      city: document.getElementById("city").value.trim(),
+      postalCode: document.getElementById("postalCode").value.trim(),
+    },
+  };
+
+  const filename = String(fileCounter).padStart(3, "0") + ".json";
+  downloadJSON(formData, filename);
+
+  const successMessage = document.getElementById("successMessage");
+  successMessage.textContent = `Success! File ${filename} has been created.`;
+  successMessage.classList.add("show");
+
+  fileCounter++;
+
+  form.reset();
+  inputs.forEach((input) => {
+    input.classList.remove("valid", "error");
+  });
+
+  setTimeout(() => {
+    successMessage.classList.remove("show");
+  }, 5000);
+});

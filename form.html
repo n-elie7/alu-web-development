@@ -1,47 +1,68 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form with Validation</title>
+    <title>User Registration Form</title>
     <link rel="stylesheet" href="form.css">
 </head>
 <body>
     <div class="container">
-        <div class="success-message" id="successMessage">
-            Form submitted successfully!
-        </div>
-    <h2>Contact Form</h2>
-    
-    <form id="contactForm" novalidate>
-        <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" name="name">
-            <div class="error-message" id="nameError">Please enter your full name (at least 2 characters)</div>
-        </div>
+        <h1>User Registration</h1>
+        
+        <div class="success-message" id="successMessage"></div>
 
-        <div class="form-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email">
-            <div class="error-message" id="emailError">Please enter a valid email address</div>
-        </div>
+        <form id="registrationForm">
+            <div class="form-group">
+                <label for="name">Full Name <span>*</span></label>
+                <input type="text" id="name" name="name" required>
+                <div class="error-message" id="nameError">Name must be at least 2 characters</div>
+            </div>
 
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone">
-            <div class="error-message" id="phoneError">Please enter a valid phone number (10 digits)</div>
-        </div>
+            <div class="form-group">
+                <label for="email">Email Address <span>*</span></label>
+                <input type="email" id="email" name="email" placeholder="john@example.com">
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
 
-        <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5"></textarea>
-            <div class="error-message" id="messageError">Please enter a message (at least 10 characters)</div>
-        </div>
+            <div class="form-group">
+                <label for="phone">Phone Number <span>*</span></label>
+                <input type="tel" id="phone" name="phone" required>
+                <div class="error-message" id="phoneError">Phone must be 10-15 digits</div>
+            </div>
 
-        <button type="submit">Submit Form</button>
-    </form>
-</div>
+            <div class="form-group">
+                <label for="password">Password <span>*</span></label>
+                <input type="password" id="password" name="password" required>
+                <div class="error-message" id="passwordError">Password must be 8+ characters with uppercase, lowercase, digit, and special character</div>
+            </div>
+
+            <div class="address-section">
+                <h3>Address</h3>
+                
+                <div class="form-group">
+                    <label for="country">Country <span>*</span></label>
+                    <input type="text" id="country" name="country" required>
+                    <div class="error-message" id="countryError">Country must contain only letters and spaces</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City <span>*</span></label>
+                    <input type="text" id="city" name="city" required>
+                    <div class="error-message" id="cityError">City must contain only letters and spaces</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="postalCode">Postal Code <span>*</span></label>
+                    <input type="text" id="postalCode" name="postalCode" required>
+                    <div class="error-message" id="postalCodeError">Postal code must be 3-10 alphanumeric characters</div>
+                </div>
+            </div>
+
+            <button type="submit">Submit Registration</button>
+        </form>
+    </div>
+
+    <script src="form.js"></script>
 </body>
-<script src="form.js"></script>
 </html>
